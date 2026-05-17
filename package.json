@@ -1,0 +1,59 @@
+{
+  "name": "rep-ass-js",
+  "version": "0.0.0",
+  "description": "D3-style layout module for visualising representative assemblies (UN, US Senate, UK Commons, etc.).",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./layouts/*": {
+      "import": "./dist/layouts/*.js",
+      "types": "./dist/layouts/*.d.ts"
+    },
+    "./render": {
+      "import": "./dist/render.js",
+      "types": "./dist/render.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json --watch",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "peerDependencies": {
+    "d3-selection": "^3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "d3-selection": { "optional": true }
+  },
+  "devDependencies": {
+    "@types/d3-selection": "^3.0.0",
+    "typescript": "^5.4.0"
+  },
+  "keywords": [
+    "d3",
+    "d3-module",
+    "visualization",
+    "parliament",
+    "assembly",
+    "hemicycle",
+    "senate",
+    "congress",
+    "svg"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ContextNews/rep-ass-js.git"
+  },
+  "license": "MIT",
+  "author": "Euan Campbell"
+}
