@@ -75,8 +75,8 @@ function renderChart(
     .attr('cx', (d) => d.x)
     .attr('cy', (d) => d.y)
     .attr('r', (d) => d.r)
-    .attr('fill', (d) => d.group?.color ?? '#444')
-    .attr('stroke', 'rgba(0,0,0,0.35)')
+    .attr('fill', (d) => d.group?.color ?? '#3a3940')
+    .attr('stroke', 'rgba(0,0,0,0.55)')
     .attr('stroke-width', 0.5)
     .append('title')
     .text((d) => {
