@@ -14,4 +14,24 @@ export type {
 export { layout } from './layout'
 
 // Built-in sample configs.
-export { usSenate, ukCommons, euParliament } from './configs'
+export {
+  unGeneralAssembly,
+  euParliament,
+  usSenate,
+  usHouse,
+  canadaSenate,
+  canadaCommons,
+  ukCommons,
+  ukLords,
+  germanyBundestag,
+  franceAssembly,
+  spainCongress,
+  italyChamber,
+  polandSejm,
+  israelKnesset,
+  iranMajlis,
+  ukraineRada,
+  russiaDuma,
+  russiaFedCouncil,
+  chinaNpc,
+} from './configs'

@@ -1,47 +1,104 @@
-import { select } from 'd3-selection'
+import { select, type Selection } from 'd3-selection'
 import {
   layout,
-  usSenate,
-  ukCommons,
+  // Supranational
+  unGeneralAssembly,
   euParliament,
+  // North America
+  usSenate,
+  usHouse,
+  canadaSenate,
+  canadaCommons,
+  // United Kingdom
+  ukCommons,
+  ukLords,
+  // Continental Europe
+  germanyBundestag,
+  franceAssembly,
+  spainCongress,
+  italyChamber,
+  polandSejm,
+  // Middle East
+  israelKnesset,
+  iranMajlis,
+  // Eastern Europe / Russia
+  ukraineRada,
+  russiaDuma,
+  russiaFedCouncil,
+  // Asia
+  chinaNpc,
   type AssemblyConfig,
   type AssemblyLayout,
 } from 'rep-ass-js'
 
-const CONFIGS: AssemblyConfig[] = [usSenate, ukCommons, euParliament]
+interface Section {
+  heading: string
+  configs: AssemblyConfig[]
+}
+
+const SECTIONS: Section[] = [
+  { heading: 'Supranational', configs: [unGeneralAssembly, euParliament] },
+  {
+    heading: 'North America',
+    configs: [usSenate, usHouse, canadaSenate, canadaCommons],
+  },
+  { heading: 'United Kingdom', configs: [ukCommons, ukLords] },
+  {
+    heading: 'Continental Europe',
+    configs: [
+      germanyBundestag,
+      franceAssembly,
+      spainCongress,
+      italyChamber,
+      polandSejm,
+    ],
+  },
+  { heading: 'Middle East', configs: [israelKnesset, iranMajlis] },
+  {
+    heading: 'Eastern Europe & Russia',
+    configs: [ukraineRada, russiaDuma, russiaFedCouncil],
+  },
+  { heading: 'Asia', configs: [chinaNpc] },
+]
 
 const root = select<HTMLElement, unknown>('#examples')
 
-CONFIGS.forEach((config) => {
-  const result = layout(config)
-  const section = root.append('section').attr('class', 'assembly')
+SECTIONS.forEach((section) => {
+  root
+    .append('h2')
+    .attr('class', 'region-heading')
+    .text(section.heading)
 
-  section
-    .append('header')
-    .attr('class', 'assembly-header')
-    .html(
-      `
-      <div>
-        <h2>${escapeHtml(config.name)}</h2>
-        ${config.description ? `<p>${escapeHtml(config.description)}</p>` : ''}
-      </div>
-      <div class="assembly-meta">
-        <span><strong>${result.seats.length}</strong> seats</span>
-        <span class="muted">·</span>
-        <span class="muted">${config.shape.type}</span>
-      </div>
-    `,
-    )
+  section.configs.forEach((config) => {
+    const result = layout(config)
+    const card = root.append('section').attr('class', 'assembly')
 
-  renderLegend(section, config)
-  renderChart(section, result)
+    card
+      .append('header')
+      .attr('class', 'assembly-header')
+      .html(
+        `
+        <div>
+          <h2>${escapeHtml(config.name)}</h2>
+          ${config.description ? `<p>${escapeHtml(config.description)}</p>` : ''}
+        </div>
+        <div class="assembly-meta">
+          <span><strong>${result.seats.length}</strong> seats</span>
+          <span class="muted">·</span>
+          <span class="muted">${config.shape.type}</span>
+        </div>
+      `,
+      )
+
+    renderLegend(card, config)
+    renderChart(card, result)
+  })
 })
 
-function renderLegend(
-  section: ReturnType<typeof root.append>,
-  config: AssemblyConfig,
-) {
-  const legend = section.append('ul').attr('class', 'legend')
+type AnySelection = Selection<HTMLElement, unknown, HTMLElement, unknown>
+
+function renderLegend(card: AnySelection, config: AssemblyConfig) {
+  const legend = card.append('ul').attr('class', 'legend')
   config.groups.forEach((g) => {
     const item = legend.append('li').attr('class', 'legend-item')
     item
@@ -56,11 +113,8 @@ function renderLegend(
   })
 }
 
-function renderChart(
-  section: ReturnType<typeof root.append>,
-  result: AssemblyLayout,
-) {
-  const svg = section
+function renderChart(card: AnySelection, result: AssemblyLayout) {
+  const svg = card
     .append('svg')
     .attr('class', 'assembly-svg')
     .attr('viewBox', `0 0 ${result.width} ${result.height}`)

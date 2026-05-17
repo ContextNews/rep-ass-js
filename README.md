@@ -6,7 +6,7 @@
 
 **Live examples:** <https://contextnews.github.io/rep-ass-js/>
 
-> Status: **v0.0.1** — three built-in configs (`usSenate`, `ukCommons`, `euParliament`), three layouts (`hemicycle`, `opposing-benches`, `grid`). See [`plans/001-initial-design.md`](./plans/001-initial-design.md) for the roadmap.
+> Status: **v0.0.1** — 19 built-in configs covering most major world parliaments, three layouts (`hemicycle`, `opposing-benches`, `grid`). See [`plans/001-initial-design.md`](./plans/001-initial-design.md) for the roadmap.
 
 ## Install
 
@@ -134,11 +134,21 @@ Row-major seat order (left-to-right, top-to-bottom).
 
 ## Built-in configs
 
+| Region | Configs |
+| --- | --- |
+| Supranational | `unGeneralAssembly`, `euParliament` |
+| North America | `usSenate`, `usHouse`, `canadaSenate`, `canadaCommons` |
+| United Kingdom | `ukCommons`, `ukLords` |
+| Continental Europe | `germanyBundestag`, `franceAssembly`, `spainCongress`, `italyChamber`, `polandSejm` |
+| Middle East | `israelKnesset`, `iranMajlis` |
+| Eastern Europe / Russia | `ukraineRada`, `russiaDuma`, `russiaFedCouncil` |
+| Asia | `chinaNpc` |
+
 ```ts
-import { usSenate, ukCommons, euParliament } from 'rep-ass-js'
+import { ukCommons, usSenate, israelKnesset } from 'rep-ass-js'
 ```
 
-Each is an `AssemblyConfig` with reasonable defaults and stylised composition. Tweak them by spreading:
+Each is an `AssemblyConfig` with reasonable defaults and stylised composition reflecting current real-world membership (composition figures are approximate and not auto-updated). Tweak them by spreading:
 
 ```ts
 const customCommons: AssemblyConfig = {
