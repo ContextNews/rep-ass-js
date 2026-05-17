@@ -4,6 +4,8 @@
 
 `rep-ass-js` is **config-driven**: you describe an assembly (shape + dimensions + groups) once as a plain object, hand it to `layout()`, and get back positioned seats. You render them with whatever you like — D3 selections, plain DOM, Canvas, React, your own renderer.
 
+**Live examples:** <https://contextnews.github.io/rep-ass-js/>
+
 > Status: **v0.0.1** — three built-in configs (`usSenate`, `ukCommons`, `euParliament`), three layouts (`hemicycle`, `opposing-benches`, `grid`). See [`plans/001-initial-design.md`](./plans/001-initial-design.md) for the roadmap.
 
 ## Install
@@ -171,10 +173,6 @@ rep-ass-js/
 ├── examples/                # Vite-served demo page (D3 renderer)
 └── plans/                   # design docs & roadmap
 ```
-
-## Repo
-
-Lives in the [`ContextNews`](https://github.com/ContextNews) GitHub org alongside the other Context projects. Will be consumed by `context-web-app` for in-app visualisations of named assemblies.
 
 ## License
 
