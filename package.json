@@ -1,7 +1,7 @@
 {
   "name": "rep-ass-js",
-  "version": "0.0.0",
-  "description": "D3-style layout module for visualising representative assemblies (UN, US Senate, UK Commons, etc.).",
+  "version": "0.0.1",
+  "description": "Config-driven layout library for visualising representative assemblies (UN, US Senate, UK Commons, EU Parliament, etc.).",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -10,14 +10,6 @@
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
-    },
-    "./layouts/*": {
-      "import": "./dist/layouts/*.js",
-      "types": "./dist/layouts/*.d.ts"
-    },
-    "./render": {
-      "import": "./dist/render.js",
-      "types": "./dist/render.d.ts"
     }
   },
   "files": [
@@ -26,22 +18,18 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "dev": "tsc -p tsconfig.json --watch",
+    "dev": "vite",
+    "preview": "vite preview",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
-  "peerDependencies": {
-    "d3-selection": "^3.0.0"
-  },
-  "peerDependenciesMeta": {
-    "d3-selection": { "optional": true }
-  },
   "devDependencies": {
-    "@types/d3-selection": "^3.0.0",
-    "typescript": "^5.4.0"
+    "@types/d3-selection": "^3.0.10",
+    "d3-selection": "^3.0.0",
+    "typescript": "^5.4.0",
+    "vite": "^5.4.0"
   },
   "keywords": [
     "d3",
-    "d3-module",
     "visualization",
     "parliament",
     "assembly",
